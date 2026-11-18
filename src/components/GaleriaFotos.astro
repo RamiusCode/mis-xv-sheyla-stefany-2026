@@ -1,0 +1,457 @@
+---
+// GaleriaFotos.astro - Una foto elegante XV años
+---
+
+<section class="py-12 px-4 relative overflow-hidden">
+  <div class="max-w-2xl mx-auto relative z-10">
+    <!-- SEPARADOR SUPERIOR -->
+    <div class="flex justify-center mb-6" id="gal-sep-top">
+      <img
+        src="/imagenes/FlorSeparador.webp"
+        alt="Flores decorativas"
+        class="w-36 sm:w-52 md:w-64 h-auto object-contain"
+      />
+    </div>
+
+    <!-- TÍTULO -->
+    <div class="text-center mb-8" id="gal-titulo">
+      <h2
+        class="font-great-vibes text-5xl md:text-6xl lg:text-7xl text-[#C7CCD4] mb-3"
+      >
+        Mi Foto Especial
+      </h2>
+      <div class="flex items-center justify-center gap-3">
+        <div class="w-16 h-px bg-gradient-to-r from-transparent to-[#C7CCD4]">
+        </div>
+        <img
+          src="/gif/estrella.png"
+          alt=""
+          class="w-5 h-5 object-contain"
+          id="gal-estrella-c"
+        />
+        <div class="w-16 h-px bg-gradient-to-l from-transparent to-[#C7CCD4]">
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR FOTO CON FLORES LATERALES -->
+    <div class="relative flex items-center justify-center" id="gal-foto-wrap">
+      <!-- FLOR LATERAL IZQUIERDA -->
+      <div
+        class="absolute -left-6 top-1/2 -translate-y-1/2 pointer-events-none z-10"
+        id="gal-flor-izq"
+      >
+        <img
+          src="/imagenes/FlorLateral.webp"
+          alt="Flores"
+          class="w-16 sm:w-20 md:w-28 h-auto object-contain"
+        />
+      </div>
+
+      <!-- FLOR LATERAL DERECHA -->
+      <div
+        class="absolute -right-6 top-1/2 -translate-y-1/2 pointer-events-none z-10"
+        id="gal-flor-der"
+      >
+        <img
+          src="/imagenes/FlorLateral.webp"
+          alt="Flores"
+          class="w-16 sm:w-20 md:w-28 h-auto object-contain scale-x-[-1]"
+        />
+      </div>
+
+      <!-- MARCO EXTERIOR DECORATIVO -->
+      <div
+        class="relative cursor-pointer group"
+        id="gal-foto-card"
+        title="Click para ampliar"
+      >
+        <!-- Resplandor de fondo -->
+        <div
+          class="absolute -inset-3 bg-gradient-to-br from-[#C7CCD4]/30 via-[#ffffff]/10 to-[#C7CCD4]/30 rounded-[2rem] blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+        >
+        </div>
+
+        <!-- Marco exterior -->
+        <div
+          class="relative p-[3px] rounded-[1.8rem] bg-gradient-to-br from-[#C7CCD4] via-[#ffffff]/60 to-[#C7CCD4]"
+        >
+          <!-- Marco interior -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-[1.6rem] p-3">
+            <!-- Esquinas decorativas -->
+            <div class="relative">
+              <div
+                class="absolute top-1 left-1 w-8 h-8 border-t-2 border-l-2 border-[#C7CCD4] rounded-tl-xl z-10"
+              >
+              </div>
+              <div
+                class="absolute top-1 right-1 w-8 h-8 border-t-2 border-r-2 border-[#C7CCD4] rounded-tr-xl z-10"
+              >
+              </div>
+              <div
+                class="absolute bottom-1 left-1 w-8 h-8 border-b-2 border-l-2 border-[#C7CCD4] rounded-bl-xl z-10"
+              >
+              </div>
+              <div
+                class="absolute bottom-1 right-1 w-8 h-8 border-b-2 border-r-2 border-[#C7CCD4] rounded-br-xl z-10"
+              >
+              </div>
+
+              <!-- LA FOTO -->
+              <div class="overflow-hidden rounded-2xl">
+                <img
+                  src="/imagenes/foto1.jpeg"
+                  alt="Sheyla Stefany"
+                  class="w-full h-auto max-h-[70vh] object-cover object-center block transform group-hover:scale-[1.03] transition-transform duration-700"
+                  id="gal-img"
+                />
+              </div>
+
+              <!-- Overlay hover con icono lupa -->
+              <div
+                class="absolute inset-0 rounded-2xl bg-gradient-to-t from-[#1a2a4a]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end justify-center pb-6"
+              >
+                <div
+                  class="flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/40"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-5 h-5 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"
+                    ></path>
+                  </svg>
+                  <span class="font-charm text-white text-base">Ver foto</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estrellas decorativas en las esquinas del marco -->
+        <div class="absolute -top-3 -left-3 z-20" id="gal-star-tl">
+          <img src="/gif/estrella.png" alt="" class="w-7 h-7 object-contain" />
+        </div>
+        <div class="absolute -top-3 -right-3 z-20" id="gal-star-tr">
+          <img
+            src="/gif/estrella.png"
+            alt=""
+            class="w-7 h-7 object-contain scale-x-[-1]"
+          />
+        </div>
+        <div class="absolute -bottom-3 -left-3 z-20" id="gal-star-bl">
+          <img src="/gif/estrella.png" alt="" class="w-5 h-5 object-contain" />
+        </div>
+        <div class="absolute -bottom-3 -right-3 z-20" id="gal-star-br">
+          <img
+            src="/gif/estrella.png"
+            alt=""
+            class="w-5 h-5 object-contain scale-x-[-1]"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- TEXTO BAJO LA FOTO -->
+    <div class="text-center mt-8" id="gal-subtitulo">
+      <p class="font-great-vibes text-3xl md:text-4xl text-[#C7CCD4]">
+        Sheyla Stefany
+      </p>
+      <p class="font-charm text-base md:text-lg text-[#ffffff]/70 mt-1 italic">
+        XV Años · 2026
+      </p>
+    </div>
+
+    <!-- SEPARADOR INFERIOR -->
+    <div class="flex justify-center mt-6" id="gal-sep-bot">
+      <img
+        src="/imagenes/FlorSeparador.webp"
+        alt="Flores decorativas"
+        class="w-36 sm:w-52 md:w-64 h-auto object-contain scale-y-[-1]"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div
+  id="gal-modal"
+  class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden items-center justify-center p-4"
+>
+  <!-- Botón cerrar -->
+  <button
+    id="gal-cerrar"
+    class="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 bg-white/10 hover:bg-white/25 border border-white/20 rounded-full flex items-center justify-center transition-all duration-300 z-10"
+    aria-label="Cerrar"
+  >
+    <span class="text-white text-2xl leading-none">&times;</span>
+  </button>
+
+  <div class="relative max-w-3xl w-full" id="gal-modal-contenido">
+    <!-- Resplandor -->
+    <div
+      class="absolute -inset-6 bg-gradient-to-br from-[#C7CCD4]/20 via-transparent to-[#C7CCD4]/20 rounded-3xl blur-2xl"
+    >
+    </div>
+
+    <!-- Marco del modal -->
+    <div
+      class="relative p-[2px] rounded-3xl bg-gradient-to-br from-[#C7CCD4] via-[#ffffff]/40 to-[#C7CCD4]"
+    >
+      <div class="bg-[#0d1b35] rounded-3xl p-4">
+        <img
+          id="gal-modal-img"
+          src="/imagenes/foto1.jpeg"
+          alt="Sheyla Stefany"
+          class="w-full h-auto max-h-[80vh] object-contain rounded-2xl"
+        />
+        <p class="font-great-vibes text-2xl text-[#C7CCD4] text-center mt-4">
+          Sheyla Stefany · XV Años
+        </p>
+      </div>
+    </div>
+
+    <!-- Estrellas del modal -->
+    <div class="absolute -top-5 -left-5 opacity-80" id="gal-modal-star-1">
+      <img src="/gif/estrella.png" alt="" class="w-10 h-10 object-contain" />
+    </div>
+    <div class="absolute -bottom-5 -right-5 opacity-80" id="gal-modal-star-2">
+      <img
+        src="/gif/estrella.png"
+        alt=""
+        class="w-10 h-10 object-contain scale-x-[-1]"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+      // ── ESTADO INICIAL ──────────────────────────────────────
+      gsap.set("#gal-sep-top, #gal-sep-bot", { opacity: 0, y: -20 });
+      gsap.set("#gal-titulo", { opacity: 0, y: 30 });
+      gsap.set("#gal-foto-wrap", { opacity: 0, scale: 0.92, y: 40 });
+      gsap.set("#gal-subtitulo", { opacity: 0, y: 20 });
+      gsap.set("#gal-flor-izq", { opacity: 0, x: -40 });
+      gsap.set("#gal-flor-der", { opacity: 0, x: 40 });
+      gsap.set("#gal-star-tl, #gal-star-tr, #gal-star-bl, #gal-star-br", {
+        opacity: 0,
+        scale: 0,
+      });
+      gsap.set("#gal-estrella-c", { opacity: 0, scale: 0 });
+
+      // ── ANIMACIÓN DE ENTRADA ────────────────────────────────
+      ScrollTrigger.create({
+        trigger: "#gal-titulo",
+        start: "top 88%",
+        end: "top 20%",
+        onEnter: () => {
+          const tl = gsap.timeline();
+
+          tl.to("#gal-sep-top", {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          })
+            .to(
+              "#gal-titulo",
+              { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+              "-=0.4",
+            )
+            .to(
+              "#gal-estrella-c",
+              { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" },
+              "-=0.3",
+            )
+            .to(
+              "#gal-flor-izq, #gal-flor-der",
+              { opacity: 1, x: 0, duration: 0.9, ease: "power3.out" },
+              "-=0.5",
+            )
+            .to(
+              "#gal-foto-wrap",
+              { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power3.out" },
+              "-=0.6",
+            )
+            .to(
+              "#gal-star-tl, #gal-star-tr, #gal-star-bl, #gal-star-br",
+              {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                ease: "back.out(2)",
+                stagger: 0.08,
+              },
+              "-=0.4",
+            )
+            .to(
+              "#gal-subtitulo",
+              { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+              "-=0.3",
+            )
+            .to(
+              "#gal-sep-bot",
+              { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+              "-=0.4",
+            );
+
+          // Flotado suave de flores laterales
+          gsap.to("#gal-flor-izq", {
+            y: -10,
+            duration: 3.5,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1,
+          });
+          gsap.to("#gal-flor-der", {
+            y: -10,
+            duration: 3.8,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.2,
+          });
+
+          // Pulso suave de las estrellas
+          gsap.to("#gal-star-tl, #gal-star-br", {
+            scale: 1.15,
+            rotation: 15,
+            duration: 2.5,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.2,
+            stagger: 0.3,
+          });
+          gsap.to("#gal-star-tr, #gal-star-bl", {
+            scale: 1.15,
+            rotation: -15,
+            duration: 2.8,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.5,
+            stagger: 0.3,
+          });
+
+          // Glow suave en la estrella central
+          gsap.to("#gal-estrella-c", {
+            scale: 1.2,
+            rotation: 20,
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1,
+          });
+        },
+        onLeaveBack: () => {
+          gsap.set("#gal-sep-top, #gal-sep-bot", { opacity: 0, y: -20 });
+          gsap.set("#gal-titulo", { opacity: 0, y: 30 });
+          gsap.set("#gal-foto-wrap", { opacity: 0, scale: 0.92, y: 40 });
+          gsap.set("#gal-subtitulo", { opacity: 0, y: 20 });
+          gsap.set("#gal-flor-izq", { opacity: 0, x: -40 });
+          gsap.set("#gal-flor-der", { opacity: 0, x: 40 });
+          gsap.set("#gal-star-tl, #gal-star-tr, #gal-star-bl, #gal-star-br", {
+            opacity: 0,
+            scale: 0,
+          });
+          gsap.set("#gal-estrella-c", { opacity: 0, scale: 0 });
+        },
+      });
+
+      // ── MODAL ────────────────────────────────────────────────
+      const modal = document.getElementById("gal-modal");
+      const fotoCard = document.getElementById("gal-foto-card");
+      const btnCerrar = document.getElementById("gal-cerrar");
+
+      const abrirModal = () => {
+        if (!modal) return;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        gsap.fromTo(
+          "#gal-modal-contenido",
+          { scale: 0.85, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.5)" },
+        );
+        gsap.fromTo(
+          "#gal-modal-star-1",
+          { x: -40, opacity: 0 },
+          { x: 0, opacity: 0.8, duration: 0.6, ease: "power2.out", delay: 0.2 },
+        );
+        gsap.fromTo(
+          "#gal-modal-star-2",
+          { x: 40, opacity: 0 },
+          { x: 0, opacity: 0.8, duration: 0.6, ease: "power2.out", delay: 0.3 },
+        );
+        gsap.to("#gal-modal-star-1", {
+          y: -10,
+          rotation: 10,
+          duration: 2.5,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.5,
+        });
+        gsap.to("#gal-modal-star-2", {
+          y: -10,
+          rotation: -10,
+          duration: 2.8,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+          delay: 0.7,
+        });
+      };
+
+      const cerrarModal = () => {
+        if (!modal) return;
+        gsap.to("#gal-modal-contenido", {
+          scale: 0.85,
+          opacity: 0,
+          duration: 0.3,
+          ease: "power2.in",
+          onComplete: () => {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+          },
+        });
+      };
+
+      if (fotoCard) fotoCard.addEventListener("click", abrirModal);
+      if (btnCerrar) btnCerrar.addEventListener("click", cerrarModal);
+      if (modal)
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) cerrarModal();
+        });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal && !modal.classList.contains("hidden"))
+          cerrarModal();
+      });
+    });
+  }
+</script>
+
+<style>
+  #gal-foto-card {
+    transition: transform 0.4s ease;
+  }
+  #gal-foto-card:hover {
+    transform: translateY(-6px);
+  }
+</style>

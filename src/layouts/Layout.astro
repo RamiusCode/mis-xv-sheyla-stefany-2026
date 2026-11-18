@@ -1,0 +1,238 @@
+---
+// src/layouts/Layout.astro
+import "../styles/global.css";
+export interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+// Vista previa de WhatsApp: solo se activa cuando astro.config.mjs tiene `site`
+const ogImage = Astro.site ? new URL("/og-miniatura.jpg", Astro.site).href : null;
+---
+
+<!doctype html>
+<html lang="es" class="m-0 p-0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light only" />
+    <link rel="icon" type="image/svg+xml" href="/Coronadorada.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {ogImage && (
+      <>
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="&nbsp;" />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </>
+    )}
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Forzar modo claro y evitar dark mode del navegador */
+      html {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden; /* ← Elimina scroll horizontal */
+        color-scheme: light only;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden; /* ← Elimina scroll horizontal */
+        background-image: url("/imagenes/fondosin.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color-scheme: light only;
+        background-color: #ffffff;
+      }
+
+      main {
+        background: transparent !important;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen m-0 p-0">
+    <canvas id="estrellasCanvas"></canvas>
+    <main class="m-0 p-0 overflow-x-hidden">
+      <slot />
+    </main>
+  </body>
+
+  <style>
+    #estrellasCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+
+  <script>
+    const canvas = document.getElementById("estrellasCanvas") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d")!;
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    interface Particle {
+      x: number;
+      y: number;
+      size: number;
+      opacity: number;
+      speedX: number;
+      speedY: number;
+      twinkleSpeed: number;
+      twinkleOffset: number;
+      rotation: number;
+      rotationSpeed: number;
+      points: number;
+    }
+
+    const NUM_PARTICLES = 110;
+    const particles: Particle[] = [];
+
+    // 45% borde izquierdo, 45% borde derecho, 10% centro
+    function biasedX(): number {
+      const r = Math.random();
+      if (r < 0.45) {
+        return Math.random() * canvas.width * 0.18;
+      } else if (r < 0.90) {
+        return canvas.width * 0.82 + Math.random() * canvas.width * 0.18;
+      } else {
+        return canvas.width * 0.18 + Math.random() * canvas.width * 0.64;
+      }
+    }
+
+    function createParticle(): Particle {
+      return {
+        x: biasedX(),
+        y: Math.random() * canvas.height,
+        size: Math.random() * 6 + 2,
+        opacity: Math.random() * 0.6 + 0.2,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        twinkleOffset: Math.random() * Math.PI * 2,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.01,
+        points: Math.random() < 0.5 ? 4 : 5,
+      };
+    }
+
+    for (let i = 0; i < NUM_PARTICLES; i++) {
+      particles.push(createParticle());
+    }
+
+    function drawStar(
+      x: number,
+      y: number,
+      points: number,
+      outerRadius: number,
+      innerRadius: number,
+      rotation: number,
+      opacity: number
+    ) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      ctx.globalAlpha = opacity;
+
+      const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, outerRadius);
+      gradient.addColorStop(0, "#FFFFFF");
+      gradient.addColorStop(0.4, "#E6EAF0");
+      gradient.addColorStop(1, "#9AA3B0");
+
+      ctx.fillStyle = gradient;
+      ctx.shadowColor = "#E6EAF0";
+      ctx.shadowBlur = outerRadius * 2;
+
+      ctx.beginPath();
+      for (let i = 0; i < points * 2; i++) {
+        const angle = (i * Math.PI) / points;
+        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+        const px = Math.cos(angle) * radius;
+        const py = Math.sin(angle) * radius;
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    let frame = 0;
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      frame++;
+
+      for (const p of particles) {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        p.rotation += p.rotationSpeed;
+
+        // Al salir por arriba o abajo, reaparece con X sesgada a los bordes
+        if (p.y < -20) { p.y = canvas.height + 20; p.x = biasedX(); }
+        if (p.y > canvas.height + 20) { p.y = -20; p.x = biasedX(); }
+        // Al salir por los lados, reaparece al lado opuesto con X sesgada
+        if (p.x < -20) { p.x = biasedX(); }
+        if (p.x > canvas.width + 20) { p.x = biasedX(); }
+
+        const twinkle =
+          p.opacity * 0.6 +
+          Math.abs(Math.sin(frame * p.twinkleSpeed + p.twinkleOffset)) *
+            p.opacity *
+            0.4;
+
+        drawStar(p.x, p.y, p.points, p.size, p.size * 0.4, p.rotation, twinkle);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</html>
