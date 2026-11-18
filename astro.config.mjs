@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: poner aquí la dirección final de Vercel, ej: site: 'https://mis-xv-sheyla.vercel.app',
+  site: 'https://mis-xv-sheyla-stefany-2026.vercel.app',
   vite: {
     plugins: [tailwindcss()]
   }
